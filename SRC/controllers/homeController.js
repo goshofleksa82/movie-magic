@@ -20,8 +20,6 @@ router.get('/search', (req, res) => {
    res.render('home/search');
 });
 
-router.get('/create', (req, res) => {
-   res.render('home/create');
-});
+
 
 export default router;
