@@ -16,9 +16,6 @@ router.get('/about', (req, res) => {
    res.render('home/about');
 });
 
-router.get('/search', (req, res) => {
-   res.render('home/search');
-});
 
 
 
