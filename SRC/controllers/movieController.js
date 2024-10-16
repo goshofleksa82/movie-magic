@@ -17,26 +17,28 @@ router.post('/create', async (req, res) => {
 
 
 router.get('/search', async (req, res) => {
- const filter = req.query;
- const movies = await movieService.getAll(filter)
-  
-  res.render('home', {isSearch : true, movies, filter});
+  const filter = req.query;
+  const movies = await movieService.getAll(filter).lean();
+
+  res.render('home', { isSearch: true, movies, filter });
 })
 
 router.get('/:movieId/details', async (req, res) => {
- const movieId = req.params.movieId;
-  const movie  = await movieService.getOne(movieId)
+  const movieId = req.params.movieId;
 
-movie.ratingView = getRatingViewData(movie.rating);
- 
+  const movie = await movieService.getOne(movieId).lean();
+
+
+  movie.ratingView = getRatingViewData(movie.rating);
+
   res.render('movies/details', { movie })
 })
 
-function getRatingViewData(rating){
-  if(!Number.isInteger(rating)){
+function getRatingViewData(rating) {
+  if (!Number.isInteger(rating)) {
     return 'n\\a';
   }
-  
+
   return '&#x2605;'.repeat(rating);
 }
 export default router;
