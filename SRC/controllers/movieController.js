@@ -8,7 +8,7 @@ router.get('/create', (req, res) => {
   res.render('movies/create');
 })
 
-function toArray(documents){
+function toArray(documents) {
   return documents.map(document => document.toObject());
 }
 
@@ -25,12 +25,14 @@ router.get('/search', async (req, res) => {
   const filter = req.query;
   const movies = await movieService.getAll(filter);
 
-  res.render('home', { isSearch: true, movies : toArray(movies), filter });
+  res.render('home', { isSearch: true, movies: toArray(movies), filter });
 })
 
 router.get('/:movieId/details', async (req, res) => {
   const movieId = req.params.movieId;
   const movie = await movieService.getOne(movieId).lean();
+
+
 
   movie.ratingView = getRatingViewData(movie.rating);
 
@@ -43,6 +45,16 @@ router.get('/:movieId/attach', async (req, res) => {
 
   res.render('movies/attach', { movie, casts });
 })
+
+router.post('/:movieId/attach', async (req, res) => {
+  const movieId = req.params.movieId;
+  const castId = req.body.cast;
+
+  await movieService.attach(movieId, castId);
+
+  res.redirect(`/movies/${movieId}/details`);
+});
+
 
 function getRatingViewData(rating) {
   if (!Number.isInteger(rating)) {
