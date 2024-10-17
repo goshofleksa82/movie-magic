@@ -7,6 +7,10 @@ router.get('/create', (req, res) => {
   res.render('movies/create');
 })
 
+function toArray(documents){
+  return documents.map(document => document.toObject());
+}
+
 router.post('/create', async (req, res) => {
   const movieData = req.body;
 
@@ -18,9 +22,9 @@ router.post('/create', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   const filter = req.query;
-  const movies = await movieService.getAll(filter).lean();
+  const movies = await movieService.getAll(filter);
 
-  res.render('home', { isSearch: true, movies, filter });
+  res.render('home', { isSearch: true, movies : toArray(movies), filter });
 })
 
 router.get('/:movieId/details', async (req, res) => {
