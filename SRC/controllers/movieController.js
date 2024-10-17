@@ -29,17 +29,17 @@ router.get('/search', async (req, res) => {
 
 router.get('/:movieId/details', async (req, res) => {
   const movieId = req.params.movieId;
-
   const movie = await movieService.getOne(movieId).lean();
-
 
   movie.ratingView = getRatingViewData(movie.rating);
 
   res.render('movies/details', { movie })
 })
 
-router.get('/:movieId/attach', (req, res) => {
-  res.render('movies/attach');
+router.get('/:movieId/attach', async (req, res) => {
+  const movie = await movieService.getOne(req.params.movieId).lean();
+  
+  res.render('movies/attach', { movie });
 })
 
 function getRatingViewData(rating) {
