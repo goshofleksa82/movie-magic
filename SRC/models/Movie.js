@@ -27,13 +27,12 @@ const movieSchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxLength: 100,
+      
     },
     imageUrl: String,
     casts: [{
-        _id: false,
         character: String,
-        rel: {
+        cast: {
             type: Types.ObjectId,
             ref: 'Cast'
         }

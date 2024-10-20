@@ -23,11 +23,11 @@ const getAll = (filter = {}) => {
 const create = (movie) => Movie.create(movie);
 
 
-const getOne = (movieId) => Movie.findById(movieId).populate('casts.rel');
+const getOne = (movieId) => Movie.findById(movieId).populate('casts.cast');
 
 const attach = async (movieId, castId, character) => {
 
-    return Movie.findByIdAndUpdate(movieId, { $push: { casts: {rel: castId, character} } });
+    return Movie.findByIdAndUpdate(movieId, { $push: { casts: {cast: castId, character} } });
 }
 
 export default {
