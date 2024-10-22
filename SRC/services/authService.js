@@ -2,8 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
 
 import User from "../models/User.js";
-
-const SECRET = '18ba07130b39f2fe9ca139e4e42f9a07d718aa4685f399b705253c2ed4b8f3c0';
+import {SECRET} from '../config/constants.js';
 
 const register = (email, password) => {
     return User.create({ email, password });
