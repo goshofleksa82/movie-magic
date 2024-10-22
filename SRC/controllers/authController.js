@@ -18,4 +18,8 @@ router.post('/register', async (req, res) => {
     
 })
 
+router.get('/login', (req, res)=>{
+    res.render('auth/login');
+})
+
 export default router; 
