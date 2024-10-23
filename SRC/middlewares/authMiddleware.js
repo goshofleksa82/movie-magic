@@ -4,6 +4,8 @@ import { SECRET } from "../config/constants.js";
 export const authMiddleware = (req, res, next) => {
     //TODO: Check if there is a token in the request
     const token = req.cookies['auth'];
+    console.log(token);
+    
 
     if (!token) {
         return next();
@@ -18,10 +20,11 @@ export const authMiddleware = (req, res, next) => {
             email: decodedToken.email,
         };
             
-
         return next();
+
     } catch (err) {
-        //TODO: Invalid token
+       console.log(err);
+       
         res.clearCookie('auth');
 
         res.redirect('/auth/login')

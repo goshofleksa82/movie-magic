@@ -28,13 +28,14 @@ const login = async (email, password) => {
     //TODO: generate jwt token
     const payload = {
         _id: user._id,
-        email,
+        email: user.email,
     };
 
-    const token = jwt.sign(payload, SECRET, { expiresIn: '2h' });
+    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '2h' });
 
 
     //TODO: Return jwt token
+    return token;
 }
 
 export default {
