@@ -21,7 +21,7 @@ const movieSchema = new Schema({
         max: 2050,
     },
     rating: {
-        type: String,
+        type: Number,
         required: true,
     },
     description: {
