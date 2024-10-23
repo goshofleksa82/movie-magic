@@ -23,7 +23,7 @@ export const authMiddleware = (req, res, next) => {
         return next();
 
     } catch (err) {
-       console.log(err);
+      
        
         res.clearCookie('auth');
 

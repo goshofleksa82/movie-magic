@@ -28,7 +28,7 @@ const login = async (email, password) => {
     //TODO: generate jwt token
     const payload = {
         _id: user._id,
-        email: user.email,
+        email,
     };
 
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '2h' });

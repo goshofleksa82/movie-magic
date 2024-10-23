@@ -9,7 +9,7 @@ router.get('/create', (req, res) => {
 })
 
 //function toArray(documents) {
- // return documents.map(document => document.toObject());
+// return documents.map(document => document.toObject());
 //}
 
 router.post('/create', async (req, res) => {
@@ -33,7 +33,7 @@ router.get('/:movieId/details', async (req, res) => {
   const movieId = req.params.movieId;
   const movie = await movieService.getOne(movieId).lean();
 
-const isOwner = req.user?._id == movie.owner;
+  const isOwner = req.user?._id == movie.owner;
 
   res.render('movies/details', { movie })
 })
